@@ -1,12 +1,19 @@
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
+
+   config.omniauth :google_oauth2, ENV["GOOGLE_CLIENT_ID"], ENV["GOOGLE_CLIENT_SECRET"], 
+    { 
+      scope: "https://www.googleapis.com/auth/userinfo.email, 
+      https://www.googleapis.com/auth/userinfo.profile,
+      http://www.google.com/calendar/feeds,http://www.google.com/m8/feeds"
+    }
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '3e2b82a0b79cd46b154ef824ab6170403079af384361c9a656f3dcc5623b67ebc3773b45cd10a05e60af2573875b49334087a61d8530bdc27f649ca4e8099d5b'
+  # config.secret_key = 'c38cc9a45ab81de22b21be81af3b0c20b9195bf119c42e627dacafeb88bd97cacff0dc775c3a190d247d2a57962b23f2c337f2e665f1dcc88827f8032fe31010'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -108,7 +115,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 11
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = 'df8c4e93aae1f0db1bae9c35d794a1af724ced9776699908b18f58f1e2e7fcfbc604cadab84ab1f62e09ac736c02a6b8b184825f911851782e558c6432aafd91'
+  # config.pepper = 'c02cd8dea0fd7383fe613e45d388285726b71f31c878755c8e934d0a0ce4d3176ed2e455db9da8e7e28348003d45c5cfabd218aa6f5ad74632a42e3a413b6a47'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
@@ -136,7 +143,7 @@ Devise.setup do |config|
   # initial account confirmation) to be applied. Requires additional unconfirmed_email
   # db field (see migrations). Until confirmed, new email is stored in
   # unconfirmed_email column, and copied to email column on successful confirmation.
-  config.reconfirmable = true
+  config.reconfirmable = false
 
   # Defines which key will be used when confirming an account
   # config.confirmation_keys = [:email]
