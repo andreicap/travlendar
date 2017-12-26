@@ -18,6 +18,7 @@ group :development, :test do
 end
 
 group :development do
+  # gem guard
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
@@ -25,7 +26,7 @@ group :development do
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem 'bootstrap', '~> 4.0.0.alpha6'
+gem 'bootstrap', git: 'https://github.com/twbs/bootstrap-rubygem'
 gem 'popper_js'
 
 
@@ -44,3 +45,4 @@ end
 group :production do
   gem 'rails_12factor'
 end
+
