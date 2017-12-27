@@ -9,10 +9,10 @@ class User < ApplicationRecord
   def self.from_omniauth(access_token)
     data = access_token.info
     user = User.where(:email => data["email"]).first
-
     unless user
       password = Devise.friendly_token[0,20]
       user = User.create(name: data["name"], email: data["email"],
+        picture: data[:image], url: data["google"],
         password: password, password_confirmation: password
         )
     end
@@ -30,12 +30,12 @@ class User < ApplicationRecord
       last_name: data["first_name"],
       picture: data["image"],
       email: data["email"],
+      url: data["google"],
       password: Devise.friendly_token[0,20],
       token: credentials.token,
       refresh_token: credentials.refresh_token)
    end
-    @calendar = user.get_google_calendars  
-    user
+   user
   end
 
 end

@@ -26,7 +26,7 @@ class Calendar < ApplicationRecord
 
       events.create(name: name,
         creator: creator,
-        status: status,
+        status: statu
         start: start,
         link: link,
         calendar: calendar)
