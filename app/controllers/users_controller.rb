@@ -11,5 +11,5 @@ class UsersController < ApplicationController
       redirect_to root_path, :alert => "Access denied."
     end
   end
-
+  
 end

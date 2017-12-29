@@ -32,6 +32,8 @@ gem 'popper_js'
 
 gem 'devise'
 gem "omniauth-google-oauth2"
+gem 'google-api-client', '0.8.2', require: 'google/api_client'  
+
 
 gem 'high_voltage'
 gem 'jquery-rails'
