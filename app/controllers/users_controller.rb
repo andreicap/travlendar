@@ -17,7 +17,6 @@ class UsersController < ApplicationController
 
   def getcalendar
     get_google_calendars
-    get_events_for_calendar
     redirect_to users_path
   end
  
@@ -29,13 +28,16 @@ private
     response = open(url)
     json = JSON.parse(response.read)
     calendars = json["items"]
-    # puts "--------calendars:"
-    # pp calendars
-    calendars.each { |cal| get_events_for_calendar(cal) }
+    puts "--------calendars:"
+    pp calendars
+    calendars.each do |cal| 
+      if cal["id"] == current_user.email
+         get_events_for_calendar(cal)
+      end
+    end
   end
 
   def get_events_for_calendar(cal)
-
     url = "https://www.googleapis.com/calendar/v3/calendars/#{cal["id"]}/events?access_token=#{current_user.token}"
     puts "------url:", url, "-------"
     response = open(url)
@@ -65,7 +67,7 @@ private
         location: location,
         calendar: calendar,
         htmllink: htmlLink,
-        end: endtime
+        end: endtime,
         gid: gid
       )
     end
@@ -84,13 +86,10 @@ private
       self.oauth2_token_expires_at = Time.now.utc + @response["expires_in"].to_i.seconds
       self.save!
     else
-  # No Token
+       # Something else bad happened
     end
-    rescue RestClient::BadRequest => e
-      # Bad request
-    rescue
-      # Something else bad happened
-    end
+  end
+
 
 end
 

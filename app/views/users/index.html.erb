@@ -1,19 +1,27 @@
 <div class="container">
-    <h3>Events</h3>
-    <div class="container">
+  <div class="row"></div>
+  <div class="col-md-1"><h3>Events</h3></div> 
+  <div class="col-md-6"><h3><%= link_to "Update calendar", getcalendar_path %></h3></div>
+</div>
 
-    <div class="scolumn">
-      <h3><%= link_to "Update calendar", getcalendar_path %></h3>
-      <table class="table">
-        <tbody>
-          <% current_user.events.order(:start).each do |e| %>
+<div class="container">
+
+  <div class="scolumn">
+    <table class="table">
+      <tbody>
+        <tr><th>Event</th><th>Start</th><th>End</th><th>Location</th></tr>
+        <% current_user.events.order(:start).each do |e| %>
+          <% if e.name != "no name" %>
             <tr>
-              <td><%= e.name %></td> <td>e.start</td> <td>e.end</td>
-              
+              <td><%= e.name %></td> 
+              <td><%= e.start.to_formatted_s(:short) %> </td> 
+              <td><%= e.end.to_formatted_s(:) %> </td> 
+              <td><%= e.location %></td>   
             </tr>
           <% end %>
-        </tbody>
-      </table>
-    </div>
+        <% end %>
+      </tbody>
+    </table>
   </div>
+</div>
 </div>
