@@ -16,10 +16,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def calendar
+    
+  end
+
   def getcalendar
     refresh_token
     get_google_calendars
-    redirect_to users_path
+    redirect_to calendar_path
   end
  
 private

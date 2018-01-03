@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   resources :users
   get '/about', to: 'visitors#about'
   get 'getcalendar', to: 'users#getcalendar'
+  get 'calendar', to: 'users#calendar'
 end
