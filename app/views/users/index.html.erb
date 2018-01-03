@@ -1,19 +1,22 @@
 <div class="container">
   <div class="row">
     <h3>Users</h3>
-    <div class="column">
+    <div class="container">
+
+    <div class="scolumn">
+      <p><%= link_to "Update calendar", getcalendar_path %></h1></p>
       <table class="table">
         <tbody>
           <% @users.each do |user| %>
             <tr>
-              <%= render user %>
+              <!-- <%= render user %> -->
+
+              <td>event</td>
             </tr>
           <% end %>
         </tbody>
       </table>
     </div>
   </div>
-  <% if user_signed_in? %>
-    <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
-  <% end %>
+</div>
 </div>

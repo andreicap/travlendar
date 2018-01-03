@@ -1,13 +1,16 @@
+
 class User < ApplicationRecord
 
-  # has_one :calendar
+  has_many :events
 
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :trackable, :validatable, 
   :omniauthable, :omniauth_providers => [:google_oauth2]
 
-  def self.from_omniauth(access_token)
-    data = access_token.info
+  def self.from_omniauth(oauth)
+    credentials = oauth.credentials
+    data = oauth.info
+    puts "------", "oauth", oauth.credentials, "------"
     puts "------", "data", data, "------"
     user = User.where(:email => data["email"]).first
     unless user
@@ -17,7 +20,9 @@ class User < ApplicationRecord
         email: data["email"],
         picture: data[:image],
         password: password, 
-        password_confirmation: password
+        password_confirmation: password,
+        token: credentials.token,
+        refresh_token: credentials.refresh_token
         )
     end
     user
@@ -27,7 +32,7 @@ class User < ApplicationRecord
     credentials = oauth.credentials
     data = oauth.info
     user = User.where(email: data["email"]).first
-    puts "------","find for google data", data, "------"
+    # puts "------","find for google data", data, "------"
     unless user
      user = User.create(
       first_name: data["first_name"],
@@ -39,8 +44,8 @@ class User < ApplicationRecord
       token: credentials.token,
       refresh_token: credentials.refresh_token)
    end
-    @calendar = user.get_google_calendars  
-    user
   end
+
+
 
 end

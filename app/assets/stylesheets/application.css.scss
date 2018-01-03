@@ -22,15 +22,26 @@ img {
 // override for the 'Home' navigation link
 .navbar-brand {
   font-size: inherit;
-  }
+}
 
+// .navbar {
+//   height: 80px;
+// }
+
+// .navbar >.container-fluid .navbar-brand {
+//   line-height: 50px;
+// }
+
+// .navbar-default .navbar-nav>li>a {
+//   line-height: 50px;
+// }
 // THESE ARE EXAMPLES YOU CAN MODIFY
 // create your own classes
 // to make views framework-neutral
-.column {
-  @extend .col-md-6;
-  text-align: center;
-}
+// .column {
+//   @extend .col-md-6;
+//   text-align: center;
+// }
 .form {
   @extend .col-md-6;
 }
@@ -44,6 +55,16 @@ img {
   @extend .btn-lg;
 }
 
+.col-xs-15,
+.col-sm-15,
+.col-md-15,
+.col-lg-15 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
 // apply styles to HTML elements
 // to make views framework-neutral
 main {
@@ -51,10 +72,10 @@ main {
   margin-top: 30px; // accommodate the navbar
 }
 
-section {
-  @extend .row;
-  margin-top: 20px;
-}
+// section {
+//   @extend .row;
+//   margin-top: 20px;
+// }
 
 // Styles for form views
 // using Bootstrap 4

@@ -1,10 +1,5 @@
 
-<h3>Welcome</h3>
-<p><%= link_to 'Users:', users_path %> <%= User.count %> registered</p>
-
-<% if user_signed_in? %>
-<%= link_to('Logout', destroy_user_session_path, method: :delete) %>
-<% end %>
+<h2><%= link_to 'Calendar', users_path %></h2>
 
 
 
