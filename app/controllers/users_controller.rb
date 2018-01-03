@@ -1,5 +1,6 @@
 
-require "open-uri"
+require 'open-uri'
+require 'rest-client'
 
 class UsersController < ApplicationController
   before_action :authenticate_user!
@@ -16,6 +17,7 @@ class UsersController < ApplicationController
   end
 
   def getcalendar
+    refresh_token
     get_google_calendars
     redirect_to users_path
   end
@@ -28,8 +30,8 @@ private
     response = open(url)
     json = JSON.parse(response.read)
     calendars = json["items"]
-    puts "--------calendars:"
-    pp calendars
+    # puts "--------calendars:"
+    # pp calendars
     calendars.each do |cal| 
       if cal["id"] == current_user.email
          get_events_for_calendar(cal)
@@ -39,12 +41,12 @@ private
 
   def get_events_for_calendar(cal)
     url = "https://www.googleapis.com/calendar/v3/calendars/#{cal["id"]}/events?access_token=#{current_user.token}"
-    puts "------url:", url, "-------"
+    # puts "------url:", url, "-------"
     response = open(url)
     json = JSON.parse(response.read)
     @my_events = json["items"]
 
-    puts "-------my_events:", @my_events, "---------"
+    # puts "-------my_events:", @my_events, "---------"
 
     @my_events.each do |event|
       name = event["summary"] || "no name"
@@ -75,16 +77,18 @@ private
 
   def refresh_token
     data = {
-      :client_id => GOOGLE_APP_KEY,
-      :client_secret => GOOGLE_APP_SECRET,
-      :refresh_token => self.oauth2_refresh_token,
+      :client_id => ENV["GOOGLE_CLIENT_ID"], 
+      :client_secret => ENV["GOOGLE_CLIENT_SECRET"],
+      :refresh_token => current_user.refresh_token,
       :grant_type => "refresh_token"
     }
-    @response = ActiveSupport::JSON.decode(RestClient.post "https://accounts.google.com/o/oauth2/token", data)
+    @response = JSON.parse(RestClient.post "https://accounts.google.com/o/oauth2/token", data)
+    puts "-----response:"
+    pp @response
     if @response["access_token"].present?
-      self.oauth2_token = @response["access_token"]
-      self.oauth2_token_expires_at = Time.now.utc + @response["expires_in"].to_i.seconds
-      self.save!
+      current_user.token = @response["access_token"]
+      current_user.token_expiry = Time.now.utc + @response["expires_in"].to_i.seconds
+      current_user.save!
     else
        # Something else bad happened
     end
