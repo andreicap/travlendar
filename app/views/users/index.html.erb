@@ -1,22 +1,19 @@
 <div class="container">
-  <div class="row">
-    <h3>Users</h3>
+    <h3>Events</h3>
     <div class="container">
 
     <div class="scolumn">
-      <p><%= link_to "Update calendar", getcalendar_path %></h1></p>
+      <h3><%= link_to "Update calendar", getcalendar_path %></h3>
       <table class="table">
         <tbody>
-          <% @users.each do |user| %>
+          <% current_user.events.order(:start).each do |e| %>
             <tr>
-              <!-- <%= render user %> -->
-
-              <td>event</td>
+              <td><%= e.name %></td> <td>e.start</td> <td>e.end</td>
+              
             </tr>
           <% end %>
         </tbody>
       </table>
     </div>
   </div>
-</div>
 </div>
