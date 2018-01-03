@@ -26,17 +26,23 @@ group :development do
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+#views
 gem 'bootstrap', git: 'https://github.com/twbs/bootstrap-rubygem'
 gem 'popper_js'
+gem "font-awesome-rails"
 
-
+#auth
 gem 'devise'
 gem "omniauth-google-oauth2"
 gem 'google-api-client', '0.8.2', require: 'google/api_client'  
-gem 'rest-client'
 
+#utils
+gem 'rest-client'
 gem 'high_voltage'
 gem 'jquery-rails'
+
+#db
 gem 'pg'
 
 group :development do
