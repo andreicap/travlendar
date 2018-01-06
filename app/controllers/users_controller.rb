@@ -46,6 +46,7 @@ private
   end
 
   def get_events_for_calendar(cal)
+    today = Date::today.to_time.rfc3339
     url = "https://www.googleapis.com/calendar/v3/calendars/#{cal["id"]}/events?access_token=#{current_user.token}"
     # puts "------url:", url, "-------"
     response = open(url)
@@ -53,11 +54,15 @@ private
     @my_events = json["items"]
 
     # puts "-------my_events:", @my_events, "---------"
-
+    i = 0
     @my_events.each do |event|
+      
       name = event["summary"] || "no name"
       creator = event["creator"] ? event["creator"]["email"] : nil
       start = event["start"] ? event["start"]["dateTime"] : nil
+      print "start:", start >= today if start
+      next if !start
+      next if start < today
       status = event["status"] || nil
       link = event["htmlLink"] || nil
       calendar = cal["summary"] || nil
@@ -65,6 +70,7 @@ private
       htmlLink = event["htmlLink"] || nil
       endtime = event["end"] ? event["end"]["dateTime"] : nil
       gid = event["id"]
+
 
       current_user.events.create(
         name: name,
@@ -78,7 +84,10 @@ private
         end: endtime,
         gid: gid
       )
+      i+=1
+      break if i == 10
     end
+   
   end
 
   def refresh_token
@@ -89,8 +98,8 @@ private
       :grant_type => "refresh_token"
     }
     @response = JSON.parse(RestClient.post "https://accounts.google.com/o/oauth2/token", data)
-    puts "-----response:"
-    pp @response
+    # puts "-----response:"
+    # pp @response
     if @response["access_token"].present?
       current_user.token = @response["access_token"]
       current_user.token_expiry = Time.now.utc + @response["expires_in"].to_i.seconds
