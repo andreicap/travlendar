@@ -5,20 +5,25 @@
     <h3><%= link_to "Update calendar", getcalendar_path, class: 'btn btn-info'  %></h3>
   </div>
 </div>
+  
+
+
+<% @events = current_user.events.order(:start) %>
 
 <div class="container-fluid">
 
   <div class="scolumn">
     <table class="table">
       <tbody>
-        <tr><th>Event</th><th>Start</th><th>End</th><th>Location</th></tr>
-        <% current_user.events.order(:start).each do |e| %>
+        <tr><th>Event</th><th>Start</th><th>End</th><th>Location</th><th>Select</th></tr>
+        <% @events.each.with_index do |e, i| %>
           <% if e.name != "no name" %>
             <tr>
               <td><%= e.name %></td> 
               <td><%= e.start.to_formatted_s(:short) %> </td> 
               <td><%= e.end.to_formatted_s(:short) %> </td> 
-              <td><%= e.location %></td>   
+              <td><%= e.location %></td>
+              <td><button id="<%= 'btn' %>" class="btn btn-dark" cursor:pointer;"> Select </button> </td>  
             </tr>
           <% end %>
         <% end %>
@@ -27,3 +32,9 @@
   </div>
 </div>
 </div>
+
+
+<div class="container" align="center">  <%= render 'maps' %>  </div>
+
+
+
