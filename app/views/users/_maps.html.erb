@@ -39,6 +39,10 @@
  -->
 
 <div id="map"></div>
+<br/>
+<br/>
+<br/>
+<br/>
 
 
 <style>
@@ -89,19 +93,20 @@
 
     // $('.selector').addEventListener('click', onChangeHandler, true);
     $('.selector').click(function(){
-      calculateAndDisplayRoute(directionsService, directionsDisplay, this.value);
+      // console.log(this);
+      calculateAndDisplayRoute(directionsService, directionsDisplay, this.value, this.id);
     });
     // document.getElementById('btn').addEventListener('click', onChangeHandler, true);
   }
 
-  function calculateAndDisplayRoute(directionsService, directionsDisplay, val) {
+  function calculateAndDisplayRoute(directionsService, directionsDisplay, val, mode) {
     if (val < 1) {
        window.alert('No possible for first event in the calendar')
     } else {
       directionsService.route({
         origin: window.events[val-1].location,
         destination: window.events[val].location,
-        travelMode: 'DRIVING'
+        travelMode: mode
       }, 
       function(response, status) {
         if (status === 'OK') {

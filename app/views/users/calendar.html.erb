@@ -23,7 +23,15 @@
               <td><%= e.start.to_formatted_s(:short) %> </td> 
               <td><%= e.end.to_formatted_s(:short) %> </td> 
               <td><%= e.location %></td>
-              <td><button id="<%= i %>" class="btn btn-dark selector" value="<%= i %>"> Select </button> </td>  
+              <!-- <td><button id="<%= i %>" class="btn btn-dark selector" value="<%= i %>"> Select </button> </td>   -->
+              <td>
+                <div class="btn-group btn-group-sm" role="group">
+                  <button type="button" id='DRIVING' class="btn btn-secondary selector" value="<%= i %>"><i class="fa fa-car" aria-hidden="true"></i></button>
+                  <button type="button" id='WALKING' class="btn btn-secondary selector" value="<%= i %>"><i class="fa fa-male" aria-hidden="true"></i></button>
+                  <button type="button" id='CYCLING' class="btn btn-secondary selector" value="<%= i %>"><i class="fa fa-bicycle" aria-hidden="true"></i></button>
+                  <button type="button" id='TRANSIT' class="btn btn-secondary selector" value="<%= i %>"><i class="fa fa-subway" aria-hidden="true"></i></button>
+                </div>
+              </td>
             </tr>
           <% end %>
         <% end %>
