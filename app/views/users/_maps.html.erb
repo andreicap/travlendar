@@ -1,15 +1,9 @@
 <% content_for :title, 'Calendar' %>
-
+<!-- 
 <h1> Maps </h1>
 
-
+ -->
 <div id="map"></div>
-
-
-<br/>
-<br/>
-<br/>
-<br/>
 
 
 <style>
@@ -19,11 +13,11 @@
         height: 480px;
       }
       /* Optional: Makes the sample page fill the window. */
-      html, body {
+/*      html, body {
         height: 100%;
         margin: 0;
         padding: 0;
-      }
+      }*/
 /*      #floating-panel {
         position: relative;
         top: 10px;
@@ -73,7 +67,9 @@
       directionsService.route({
         origin: window.events[val-1].location,
         destination: window.events[val].location,
-        travelMode: mode
+        travelMode: mode,
+        provideRouteAlternatives: true,
+        unitSystem: google.maps.UnitSystem.METRIC
       }, 
       function(response, status) {
         if (status === 'OK') {
