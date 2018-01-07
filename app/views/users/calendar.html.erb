@@ -1,7 +1,7 @@
 <div class="container-full-bg">
   <div class="jumbotron " align="center">
 
-    <h3><a class="btn btn-info" href="/getcalendar"> <%= fa_icon 'refresh' %>Update calendar <%= fa_icon 'refresh' %></a></h3>
+    <h3><a class="btn btn-info" href="/getcalendar"> <%= fa_icon 'refresh' %> Update calendar <%= fa_icon 'refresh' %></a></h3>
     <% @events = current_user.events.order(:start) %>
     <div class="container-fluid" align="center">
       <% if @events.any? %>

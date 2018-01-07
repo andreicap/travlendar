@@ -1,8 +1,7 @@
 <div class="container">
   <nav class="navbar bg">
     <div class="row">
-
-        <h1><%= link_to "Travlendar", root_path, class: 'navbar-brand' %></h1>
+        <h1><%= link_to "Travlendar+", root_path, class: 'navbar-brand' %></h1>
     </div>
 
     <div class="collapse navbar-toggleable" id="exCollapsingNavbar2">
@@ -12,17 +11,16 @@
       </div>
     </div>
 
-
+    
     <div class="dropdown">
       <button class="btn btn-secondary dropdown-toggle"
       type="button" id="dropdownMenu1" data-toggle="dropdown"
       aria-haspopup="true" aria-expanded="false">
       <% if user_signed_in? %>
-
-      <%= current_user.name %> 
-    <% else %>
-      More
-    <% end %>
+        <%= current_user.name %> 
+      <% else %>
+        Options
+      <% end %>
       </button>
 
     <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
