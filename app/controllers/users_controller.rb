@@ -53,7 +53,6 @@ private
     response = open(url)
     json = JSON.parse(response.read)
     @my_events = json["items"]
-
     # puts "-------my_events:", @my_events, "---------"
     i = 0
     @my_events.each do |event|

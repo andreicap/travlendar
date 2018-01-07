@@ -1,18 +1,15 @@
-<div class="jumbotron jumbotron-fluid">
-<div class="container">
-  <div class="p-2">
+<div class="jumbotron " align="center">
+
+
     <h3><%= link_to "Update calendar", getcalendar_path, class: 'btn btn-info'  %></h3>
-  </div>
-</div>
 
 <% @events = current_user.events.order(:start) %>
-<div class="container-fluid">
-  <div class="scolumn">
+<div class="container-fluid" align="center">
     <% if @events.any? %>
-      <table class="table table-striped table-responsive ">
+      <table class="table table-striped">
         <tbody>
           <thead>
-            <tr><th>Event</th><th>Start</th><th>End</th><th>Location</th><th>Select</te>
+            <tr><th>Event</th><th>Start</th><th>End</th><th>Location</th><th>Select</th>
           </thead>
           <% @events.each.with_index do |e, i| %>
             <% if e.name != "no name" %>
@@ -42,7 +39,6 @@
         <% end %>
       </tbody>
     </table>
-  </div>
 </div>
 <div class="container" align="center">  <%= render 'maps' %>  </div>
 </div>
