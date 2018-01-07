@@ -23,6 +23,7 @@ class UsersController < ApplicationController
   end
 
   def getcalendar
+    current_user.events.destroy_all
     refresh_token
     get_google_calendars
     redirect_to calendar_path
@@ -62,13 +63,13 @@ private
       start = event["start"] ? event["start"]["dateTime"] : nil
       print "start:", start >= today if start
       next if !start
-      next if start < DateTime.now
       status = event["status"] || nil
       link = event["htmlLink"] || nil
       calendar = cal["summary"] || nil
       location = event["location"] || nil
       htmlLink = event["htmlLink"] || nil
       endtime = event["end"] ? event["end"]["dateTime"] : nil
+      next if endtime < DateTime.now
       gid = event["id"]
 
 
