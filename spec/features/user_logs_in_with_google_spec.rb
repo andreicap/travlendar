@@ -1,24 +1,15 @@
-# RSpec.describe Users::OmniauthCallbacksController do
-#   before :each do
-#     # This a Devise specific thing for functional tests. See https://github.com/plataformatec/devise/issues/608
-#     request.env["devise.mapping"] = Devise.mappings[:user]
-#   end
-#   describe ".create" do
+require 'rails_helper'
 
-#     it "should redirect back to sign_up page with an error when omniauth.auth is missing" do
-#       @controller.stub!(:env).and_return({"some_other_key" => "some_other_value"})
-#       get :google_oauth2
-#       flash[:error].should be
-#       flash[:error].should match /Unexpected response from Google \./
-#       response.should redirect_to new_user_registration_url
-#     end
+RSpec.describe Users::OmniauthCallbacksController, :type => :controller  do 
+  # include Devise::TestHelpers 
 
-#     it "should redirect back to sign_up page with an error when provider is missing" do
-#       stub_env_for_omniauth(nil)
-#       get :google_oauth2
-#       flash[:error].should be
-#       flash[:error].should match /Unexpected response from Google: Provider information is missing/
-#       response.should redirect_to new_user_registration_url
-#     end
-#   end
-# end
+  before do 
+    request.env["devise.mapping"] = Devise.mappings[:user] 
+    request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:google_oauth2] 
+  end 
+
+  it 'should authenticate and identify user if user is known' do 
+    get :google_oauth2 
+    expect(response).to redirect_to root_path 
+  end 
+end 
