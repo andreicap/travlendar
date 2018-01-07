@@ -1,45 +1,48 @@
-<div class="jumbotron " align="center">
+<div class="container-full-bg">
+  <div class="jumbotron " align="center">
 
-
-    <h3><%= link_to "Update calendar", getcalendar_path, class: 'btn btn-info'  %></h3>
-
-<% @events = current_user.events.order(:start) %>
-<div class="container-fluid" align="center">
-    <% if @events.any? %>
+    <h3><a class="btn btn-info" href="/getcalendar"> <%= fa_icon 'refresh' %>Update calendar <%= fa_icon 'refresh' %></a></h3>
+    <% @events = current_user.events.order(:start) %>
+    <div class="container-fluid" align="center">
+      <% if @events.any? %>
       <table class="table table-striped">
         <tbody>
-          <thead>
-            <tr><th>Event</th><th>Start</th><th>End</th><th>Location</th><th>Select</th>
+          <thead align="left">
+            <th>Event</th><th>Start</th><th>End</th><th>Location</th><th>Select</th>
           </thead>
           <% @events.each.with_index do |e, i| %>
-            <% if e.name != "no name" %>
-              <tr>
-                <td><%= e.name %></td> 
-                <td><%= e.start.to_formatted_s(:short) %> </td> 
-                <td><%= e.end.to_formatted_s(:short) %> </td> 
-                <td><%= e.location %></td>
-                <!-- <td><button id="<%= i %>" class="btn btn-dark selector" value="<%= i %>"> Select </button> </td>   -->
-                <td>
-                  <% if i>0 %>
-                    <div class="btn-group btn-group-sm" role="group">
-                      <button type="button" id='DRIVING' class="btn btn-secondary selector" value="<%= i %>"><i class="fa fa-car" aria-hidden="true"></i></button>
-                      <button type="button" id='WALKING' class="btn btn-secondary selector" value="<%= i %>"><i class="fa fa-male" aria-hidden="true"></i></button>
-                      <button type="button" id='BICYCLING' class="btn btn-secondary" value="<%= i %>"><i class="fa fa-bicycle" aria-hidden="true"></i></button>
-                      <button type="button" id='TRANSIT' class="btn btn-secondary selector" value="<%= i %>"><i class="fa fa-subway" aria-hidden="true"></i></button>
-                    </div>
-                  <% else %>
-                    <button type="button" class="btn btn-danger btn-secondary" value="<%= i %>">Not available</button>
-                  <% end %>
-                </td>
-              </tr>
-            <% end %>
+          <% if e.name != "no name" %>
+          <tr>
+            <td><%= e.name %></td> 
+            <td><%= e.start.to_formatted_s(:short) %> </td> 
+            <td><%= e.end.to_formatted_s(:short) %> </td> 
+            <td><%= e.location %></td>
+            <!-- <td><button id="<%= i %>" class="btn btn-dark selector" value="<%= i %>"> Select </button> </td>   -->
+            <td>
+              <% if i>0 %>
+              <div class="btn-group btn-group-sm" role="group">
+                <button type="button" id='DRIVING' class="btn btn-secondary selector" value="<%= i %>"><i class="fa fa-car" aria-hidden="true"></i></button>
+                <button type="button" id='WALKING' class="btn btn-secondary selector" value="<%= i %>"><i class="fa fa-male" aria-hidden="true"></i></button>
+                <button type="button" id='BICYCLING' class="btn btn-secondary" value="<%= i %>"><i class="fa fa-bicycle" aria-hidden="true"></i></button>
+                <button type="button" id='TRANSIT' class="btn btn-secondary selector" value="<%= i %>"><i class="fa fa-subway" aria-hidden="true"></i></button>
+              </div>
+              <% else %>
+              <button type="button" class="btn btn-danger btn-secondary" value="<%= i %>">Not available</button>
+              <% end %>
+            </td>
+          </tr>
+          <% end %>
           <% end %>            
-        <% else %>
-            <h4 align="center">You have no events for today in your calendar :( </h4>
-        <% end %>
-      </tbody>
-    </table>
+          <% else %>
+          <h4 align="center">You have no events for today in your calendar :( </h4>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="container" align="center">  
+      <%= render 'maps' %>  
+    </div>
+  </div>
 </div>
-<div class="container" align="center">  <%= render 'maps' %>  </div>
-</div>
+
 
