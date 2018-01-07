@@ -1,5 +1,6 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   
+  #it creates a session using google oauth 2 authentication
   def google_oauth2
       @user = User.from_omniauth(request.env["omniauth.auth"])
       if @user.persisted?

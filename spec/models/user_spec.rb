@@ -12,8 +12,9 @@ RSpec.describe User, type: :model do
     it 'validates relation to events' do
       should have_many :events
     end
-    
   end
+
+  
 
   
 end
