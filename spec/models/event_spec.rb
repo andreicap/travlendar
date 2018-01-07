@@ -15,7 +15,7 @@ RSpec.describe Event, type: :model do
     end
   end
 
-  describe 'validate presence of' do
+  describe 'Presence' do
     it 'event creator nil' do
       expect(Event.new(creator: nil)).to_not be_valid
     end
@@ -41,11 +41,16 @@ RSpec.describe Event, type: :model do
     end
   end
 
-  # describe 'validate uniqueness of attributes' do
-  #   it "validates uniqueness of gid attribute" do 
-  #     is_expected.to belongs_to :user
-  #   end
-  # end
+  describe 'Associations' do
+    it "validates belonging to user model" do 
+      should belong_to :user
+    end
+  end
 
+  describe 'Uniqueness' do
+    it "validates uniqueness of gid attribute" do 
+      should validate_uniqueness_of :gid
+    end
+  end
   
 end
