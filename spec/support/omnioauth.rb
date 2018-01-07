@@ -1,5 +1,7 @@
-def stub_env_for_omniauth(provider = "google_oauth2", uid = "1234567", email = "bob@gmail.com", name = "John Doe")
-{
+
+
+OmniAuth.config.test_mode = true 
+OmniAuth.config.add_mock(:google_oauth2, {
   "provider" => "google_oauth2",
   "uid" => "100000000000000000000",
   "info" => {
@@ -46,54 +48,5 @@ def stub_env_for_omniauth(provider = "google_oauth2", uid = "1234567", email = "
       "hd" => "company.com"
     }
   }
-}
-end
-
-
-  # OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new()
-  # end
-
-
-
-
-
-# def set_omniauth(opts = {})
-#   default = {:provider => :google_oauth2,
-#              :uuid     => "1234",
-#              :google => {
-#                             :email => "foobar@gmail.com",
-#                             :first_name => "foo",
-#                             :last_name => "bar"
-#                           }
-#             }
-
-#   credentials = default.merge(opts)
-#   provider = credentials[:provider]
-#   user_hash = credentials[provider]
-
-#   OmniAuth.config.test_mode = true
-
-#   OmniAuth.config.mock_auth[provider] = {
-#     'uid' => credentials[:uuid],
-#     "extra" => {
-#     "user_hash" => {
-#       "email" => user_hash[:email],
-#       "first_name" => user_hash[:first_name],
-#       "last_name" => user_hash[:last_name],
-#       "gender" => user_hash[:gender]
-#       }
-#     }
-#   }
-# end
-
-# def set_invalid_omniauth(opts = {})
-
-#   credentials = { :provider => :facebook,
-#                   :invalid  => :invalid_crendentials
-#                  }.merge(opts)
-
-#   OmniAuth.config.test_mode = true
-#   OmniAuth.config.mock_auth[credentials[:provider]] = credentials[:invalid]
-
-# end
+}) 
 

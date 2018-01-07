@@ -60,7 +60,7 @@ private
       name = event["summary"] || "no name"
       creator = event["creator"] ? event["creator"]["email"] : nil
       start = event["start"] ? event["start"]["dateTime"] : nil
-      print "start:", start >= today if start
+      # print "start:", start >= today if start
       next if !start
       status = event["status"] || nil
       link = event["htmlLink"] || nil

@@ -10,8 +10,8 @@ class User < ApplicationRecord
   def self.from_omniauth(oauth)
     credentials = oauth.credentials
     data = oauth.info
-    puts "------", "oauth", oauth.credentials, "------"
-    puts "------", "data", data, "------"
+    # puts "------", "oauth", oauth.credentials, "------"
+    # puts "------", "data", data, "------"
     user = User.where(:email => data["email"]).first
     unless user
       password = Devise.friendly_token[0,20]
