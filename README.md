@@ -2,13 +2,16 @@
 
 #### Deployement repository for travlendar app, a SE2 project
 
-####
- Production website https://travlendarplus.herokuapp.com
+#### Production website https://travlendarplus.herokuapp.com
 
 
 ## Getting started
 As a prerequisite, you should have installed a version of `Ruby > 2.0`.  
+How to install ruby: https://www.ruby-lang.org/en/documentation/installation/
+
 Also, a running `PostgreSQL` server.  
+How to install PostgreSQL: https://www.postgresql.org/download/
+
 The best way to install gems for rails is the `bundler` gem.  
 
 
