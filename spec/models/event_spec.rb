@@ -9,7 +9,7 @@ RSpec.describe Event, type: :model do
   end
 
   context "blank event creation should not be allowed" do
-    it "is not valid without a title" do
+    it "not valid withoud attributes" do
       event = Event.new()
       expect(event).to_not be_valid
     end
@@ -36,7 +36,7 @@ RSpec.describe Event, type: :model do
       expect(Event.new(creator: nil)).to_not be_valid
     end
 
-    it 'event creator user' do
+    it 'event user' do
       expect(Event.new(user: nil)).to_not be_valid
     end
   end

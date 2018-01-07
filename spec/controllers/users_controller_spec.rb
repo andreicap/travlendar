@@ -45,8 +45,16 @@ RSpec.describe UsersController, :type => :controller do
     end
   end
 
-  
-  
+
+  describe 'Update calendar redirects back' do
+    login_user
+    it 'redirect users back to calendar after update calendar' do
+      get :getcalendar
+      expect(response).to redirect_to calendar_path
+    end
+  end
+
+
 
 end
 
