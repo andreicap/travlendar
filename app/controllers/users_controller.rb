@@ -62,7 +62,7 @@ private
       start = event["start"] ? event["start"]["dateTime"] : nil
       print "start:", start >= today if start
       next if !start
-      next if start < today
+      next if start < DateTime.now
       status = event["status"] || nil
       link = event["htmlLink"] || nil
       calendar = cal["summary"] || nil
