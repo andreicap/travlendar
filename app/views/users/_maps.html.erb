@@ -38,6 +38,13 @@
         destination: window.events[val].location,
         travelMode: mode,
         provideRouteAlternatives: true,
+        drivingOptions: {
+          departureTime: new Date(window.events[val-1].start)
+        },
+        transitOptions: {
+          arrivalTime: new Date(window.events[val-1].start),
+          routingPreference: 'FEWER_TRANSFERS'
+        },
         unitSystem: google.maps.UnitSystem.METRIC
       }, 
       function(response, status) {
