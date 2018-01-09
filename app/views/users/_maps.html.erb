@@ -42,7 +42,7 @@
           departureTime: new Date(window.events[val-1].start)
         },
         transitOptions: {
-          arrivalTime: new Date(window.events[val-1].start),
+          arrivalTime: new Date(window.events[val].start),
           routingPreference: 'FEWER_TRANSFERS'
         },
         unitSystem: google.maps.UnitSystem.METRIC
